@@ -1,0 +1,28 @@
+.intro {
+  place-content: end center;
+  padding: 1rem 1rem max(7vh, 3rem);
+  background:
+    linear-gradient(180deg, transparent 52%, rgba(5, 8, 17, .88) 100%),
+    url('/og.png') center / cover no-repeat,
+    #050811;
+}
+
+.intro-mark,
+.intro > p {
+  display: none;
+}
+
+.intro button {
+  min-width: min(320px, 82vw);
+  font-size: 1.05rem;
+  box-shadow: 0 14px 40px rgba(0, 0, 0, .75), 0 0 30px rgba(215, 180, 99, .3);
+}
+
+@media (max-width: 760px) {
+  .intro {
+    padding-bottom: max(5vh, 2rem);
+    background-size: auto, contain, auto;
+    background-position: center, center 38%, center;
+  }
+}
+
