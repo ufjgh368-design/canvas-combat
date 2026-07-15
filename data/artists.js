@@ -20,4 +20,6 @@ export const ARTISTS = [
 ].map(a=>({...a,portrait:`assets/characters/${a.id}-portrait.webp`,battleSprite:`assets/characters/${a.id}-battle.webp`,ultimateSprite:`assets/characters/${a.id}-ultimate.webp`,koSprite:`assets/characters/${a.id}-ko.webp`,biography:`${a.nameZh}（${a.birthYear}–${a.deathYear}）是${a.nationality}藝術家，也是${a.artMovement}的重要人物。其創作以${a.keyTerms.join('、')}著稱，代表作品包括${a.representativeWorks.join('、')}。本遊戲把這些視覺特徵轉化為招式與舞台效果，讓玩家在對戰中辨認藝術史脈絡。`,styleSummary:a.keyTerms.join('、'),timeline:[`${a.birthYear}：出生`,`${a.deathYear}：逝世`],lightAttack:{name:a.moves[0],damage:8},heavyAttack:{name:a.moves[1],damage:16},ultimateAttack:{name:a.moves[2],damage:32},galleryUnlockCondition:'在單人、故事、Boss 或藝術試煉中擊敗',bossVariant:null}));
 
 for(const artist of ARTISTS)artist.portrait=`assets/characters/${artist.id}-gallery.png`;
+const daliBoss=ARTISTS.find(artist=>artist.id==='dali');
+if(daliBoss)daliBoss.bossVariant={maxHp:240,phaseThresholds:[.7,.35],shield:[30,25,35],phaseNames:['融化序曲','夢境畫框','記憶永恆'],defeatAnimation:'masterpiece-break'};
 export const ARTIST_MAP = Object.fromEntries(ARTISTS.map(a=>[a.id,a]));

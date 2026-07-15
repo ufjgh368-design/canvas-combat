@@ -4,4 +4,4 @@ dist/
 .wrangler/
 public/game/
 *.tar.gz
-
+work/
