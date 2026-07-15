@@ -1,0 +1,8 @@
+export const SAVE_KEY='canvasCombatSaveV1';
+export function defaultSave(){return {version:1,profile:{defaultP1Name:'策展人一號',defaultP2Name:'策展人二號'},unlockedArtistIds:['leonardo'],defeatedArtistIds:[],defeatedBossIds:[],storyProgress:{chapter:1},trialBestRank:null,leaderboards:[],bestScores:{},statistics:{totalBattles:0,totalCorrect:0,totalWrong:0,highestCombo:0},settings:{bgmEnabled:true,sfxEnabled:true,masterVolume:.8,bgmVolume:.5,sfxVolume:.8,reducedFlash:false,reducedMotion:false,screenShake:true,effectLevel:'full',allowMirror:false},updatedAt:new Date().toISOString()};}
+function merge(base,value){if(!value||typeof value!=='object')return base;const out={...base,...value};for(const k of Object.keys(base))if(base[k]&&typeof base[k]==='object'&&!Array.isArray(base[k]))out[k]=merge(base[k],value[k]);return out;}
+export function validateSave(v){return !!(v&&typeof v==='object'&&Number.isInteger(v.version)&&Array.isArray(v.unlockedArtistIds)&&Array.isArray(v.leaderboards)&&v.settings&&typeof v.settings==='object');}
+export function loadSave(storage=localStorage){try{const raw=storage.getItem(SAVE_KEY);if(!raw)return defaultSave();const parsed=JSON.parse(raw);return validateSave(parsed)?merge(defaultSave(),parsed):defaultSave();}catch{return defaultSave();}}
+export function writeSave(save,storage=localStorage){save.updatedAt=new Date().toISOString();storage.setItem(SAVE_KEY,JSON.stringify(save));return save;}
+export function importSave(text){const parsed=JSON.parse(text);if(!validateSave(parsed))throw new Error('存檔格式無效');return merge(defaultSave(),parsed);}
+export function recordBattle(save,record){save.leaderboards.unshift(record);save.leaderboards=save.leaderboards.slice(0,100);save.statistics.totalBattles++;return save;}

@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "sharedStyle": "西洋古典藝術 × 高級奇幻格鬥遊戲 × 博物館典藏質感；精緻全身角色、歷史服飾、戲劇性光影、清楚輪廓、角色四周安全留白；純色洋紅去背背景 #ff00ff。",
+  "negative": "不含文字、浮水印、商標、現代武器、槍械、血腥、額外肢體、裁切手腳、背景場景；角色服裝不可時代錯置；角色本體不可使用 #ff00ff。",
+  "output": {"portrait":"1024x1536 WebP/PNG","battle":"1024x1536 WebP/PNG","attack":"1024x1536 WebP/PNG","ultimate":"1024x1536 WebP/PNG","ko":"1024x1536 WebP/PNG","gallery":"1024x1536 WebP/PNG"},
+  "poses": {"portrait":"半身三分之二側面典藏肖像","battle":"直式全身格鬥站姿","attack":"向前跨步施展代表技法","ultimate":"全身大絕招蓄力，代表畫風環繞","ko":"非暴力疲憊跪姿，保持尊嚴","gallery":"正面全身英雄式封面姿勢"},
+  "artists": [
+    {"id":"leonardo","name":"達文西 Leonardo da Vinci","prompt":"義大利盛期文藝復興服裝，手持素描手稿與幾何機關，暈塗法柔光、透視線與飛行機械元素。"},
+    {"id":"michelangelo","name":"米開朗基羅 Michelangelo","prompt":"文藝復興雕刻家工坊服裝，肌理如大理石，手持雕刻槌，西斯汀穹頂光束與英雄人體感。"},
+    {"id":"raphael","name":"拉斐爾 Raphael","prompt":"優雅文藝復興宮廷服裝，均衡三角構圖、清澈藍紅色與雅典拱廊光環。"},
+    {"id":"caravaggio","name":"卡拉瓦喬 Caravaggio","prompt":"十七世紀義大利深色服裝，單束燭光切開黑暗，強烈明暗法與戲劇手勢。"},
+    {"id":"rembrandt","name":"林布蘭 Rembrandt","prompt":"荷蘭黃金時代黑衣金鏈與寬帽，金褐色側光、厚實筆觸與蝕刻線條。"},
+    {"id":"vermeer","name":"維梅爾 Johannes Vermeer","prompt":"荷蘭黃金時代克制典雅服裝，窗光、珍珠微光、群青色與寧靜室內光學氛圍。"},
+    {"id":"goya","name":"哥雅 Francisco Goya","prompt":"十八世紀末西班牙宮廷畫家服裝，黑色繪畫夢魘剪影、批判版畫線條，莊嚴非血腥。"},
+    {"id":"turner","name":"透納 J. M. W. Turner","prompt":"十九世紀英國浪漫派旅行畫家服裝，蒸汽、海霧、金色暴風與融化般大氣光。"},
+    {"id":"monet","name":"莫內 Claude Monet","prompt":"十九世紀法國戶外畫家服裝與草帽，睡蓮水波、晨霧、短促彩色筆觸。"},
+    {"id":"degas","name":"竇加 Edgar Degas","prompt":"十九世紀巴黎紳士畫家服裝，粉彩殘影、芭蕾旋轉弧線與攝影式裁切動勢。"},
+    {"id":"vangogh","name":"梵谷 Vincent van Gogh","prompt":"十九世紀南法畫家藍外套與草帽，星夜旋渦、向日葵光刃、厚塗筆觸。"},
+    {"id":"cezanne","name":"塞尚 Paul Cézanne","prompt":"普羅旺斯戶外畫家服裝，聖維克多山幾何塊面、冷暖色彩結構。"},
+    {"id":"klimt","name":"克林姆 Gustav Klimt","prompt":"維也納分離派長袍，金箔馬賽克、螺旋裝飾與寶石圖案，不含裸露。"},
+    {"id":"picasso","name":"畢卡索 Pablo Picasso","prompt":"二十世紀初巴黎畫家服裝，多視點立體切面、藍灰與赭紅拼貼能量。"},
+    {"id":"kandinsky","name":"康丁斯基 Wassily Kandinsky","prompt":"包浩斯時期正式服裝，抽象幾何、色彩音符、圓與線形成宇宙構成。"},
+    {"id":"dali","name":"達利 Salvador Dalí","prompt":"超現實主義黑西裝與標誌性翹鬍，融化時計、長腳象剪影與夢境沙色光。"},
+    {"id":"frida","name":"芙烈達・卡蘿 Frida Kahlo","prompt":"墨西哥特瓦納服飾與花冠，荊棘、雙重自我鏡像、植物生命力，尊重真實文化。"},
+    {"id":"warhol","name":"安迪・沃荷 Andy Warhol","prompt":"1960年代紐約黑高領與銀白髮，絲網印刷錯版色、漫畫網點與重複色塊。"}
+  ]
+}
