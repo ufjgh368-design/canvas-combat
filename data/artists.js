@@ -35,6 +35,15 @@ export const ARTISTS = [
   {id:'millet',nameZh:'米勒',nameEn:'Jean-François Millet',birthYear:1814,deathYear:1875,nationality:'法國',period:'寫實主義',artMovement:'巴比松畫派',title:'大地勞動的詩人',color:'#9a7847',stageId:'romantic',bgmId:'romantic',representativeWorks:['拾穗','晚鐘','播種者'],keyTerms:['農民生活','大地色調','紀念碑式人物'],moves:['播種揮擊','拾穗守護','晚鐘大地']}
 ].map(a=>({...a,portrait:`assets/characters/${a.id}-portrait.webp`,battleSprite:`assets/characters/${a.id}-battle.webp`,ultimateSprite:`assets/characters/${a.id}-ultimate.webp`,koSprite:`assets/characters/${a.id}-ko.webp`,biography:`${a.nameZh}（${a.birthYear}–${a.deathYear}）是${a.nationality}藝術家，也是${a.artMovement}的重要人物。其創作以${a.keyTerms.join('、')}著稱，代表作品包括${a.representativeWorks.join('、')}。本遊戲把這些視覺特徵轉化為招式與舞台效果，讓玩家在對戰中辨認藝術史脈絡。`,styleSummary:a.keyTerms.join('、'),timeline:[`${a.birthYear}：出生`,`${a.deathYear}：逝世`],lightAttack:{name:a.moves[0],damage:8},heavyAttack:{name:a.moves[1],damage:16},ultimateAttack:{name:a.moves[2],damage:32},galleryUnlockCondition:'在單人、故事、Boss 或藝術試煉中擊敗',bossVariant:null}));
 
+export const ARTIST_CATEGORY_GROUPS = [
+  {id:'renaissance',label:'文藝復興',artistIds:['giotto','donatello','jan-van-eyck','leonardo','michelangelo','raphael','botticelli','titian']},
+  {id:'baroque-romantic',label:'巴洛克與浪漫',artistIds:['caravaggio','rembrandt','vermeer','rubens','velazquez','goya','turner','delacroix','courbet','millet']},
+  {id:'impression-post',label:'印象與後印象',artistIds:['manet','monet','degas','renoir','vangogh','cezanne','gauguin']},
+  {id:'modern-revolution',label:'現代藝術革命',artistIds:['klimt','munch','matisse','picasso','kandinsky','dali','frida','pollock','warhol']}
+];
+const artistCategoryOrder = new Map(ARTIST_CATEGORY_GROUPS.flatMap((group,groupIndex)=>group.artistIds.map((id,artistIndex)=>[id,{groupId:group.id,groupLabel:group.label,order:groupIndex*100+artistIndex}])));
+ARTISTS.forEach(artist=>Object.assign(artist,artistCategoryOrder.get(artist.id)));
+ARTISTS.sort((a,b)=>a.order-b.order);
 for(const artist of ARTISTS)artist.portrait=`assets/characters/${artist.id}-gallery.png`;
 const daliBoss=ARTISTS.find(artist=>artist.id==='dali');
 if(daliBoss)daliBoss.bossVariant={maxHp:240,phaseThresholds:[.7,.35],shield:[30,25,35],phaseNames:['融化序曲','夢境畫框','記憶永恆'],defeatAnimation:'masterpiece-break'};

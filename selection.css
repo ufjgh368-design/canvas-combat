@@ -123,14 +123,14 @@
 .artist-portrait::after { height: 58%; background: linear-gradient(transparent 0, #08111fd9 62%, #08111fff 100%); }
 .artist-portrait img {
   box-sizing: border-box;
-  object-fit: cover;
-  object-position: center top;
-  padding: 0;
-  transform: scale(1) !important;
-  transform-origin: center top;
+  object-fit: contain;
+  object-position: center bottom;
+  padding: .35rem .35rem 0;
+  transform: scale(.96) !important;
+  transform-origin: center bottom;
 }
 .artist-card:hover .artist-portrait img,
-.artist-card.selected .artist-portrait img { transform: scale(1.03) !important; }
+.artist-card.selected .artist-portrait img { transform: scale(1) !important; }
 .artist-card-copy {
   position: absolute;
   z-index: 3;
@@ -141,6 +141,28 @@
 .artist-card-copy b { font-size: 1.12rem; text-shadow: 0 2px 8px #000; }
 .artist-card-copy small { font-size: .76rem; }
 .artist-card-copy em { margin-top: .2rem; }
+
+/* Four chronological collections shared by character select and gallery. */
+.artist-era-group { grid-column: 1 / -1; min-width: 0; }
+.artist-era-group > h4 {
+  margin: .35rem 0 .65rem;
+  padding: .45rem .7rem;
+  border-left: 3px solid var(--gold);
+  border-bottom: 1px solid #d7b46355;
+  color: var(--gold);
+  background: linear-gradient(90deg, #d7b46316, transparent 75%);
+  font: 700 clamp(1rem, 2vw, 1.25rem) Georgia, "Noto Serif TC", serif;
+  letter-spacing: .08em;
+}
+.artist-era-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(168px, 1fr));
+  gap: .8rem;
+}
+.versus-setup .artist-era-cards { grid-template-columns: repeat(auto-fill, minmax(145px, 1fr)); }
+.gallery-grid { display: block; }
+.gallery-grid .artist-era-group { margin-bottom: 1.2rem; }
+.gallery-grid .artist-era-cards { grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: .7rem; }
 
 /* 16:9 classroom projection layout: keep every primary control in one view. */
 @media (min-width: 900px) and (min-height: 680px) {
@@ -179,4 +201,6 @@
   #setup.submenu-screen, #content.submenu-screen { background-attachment: scroll !important; }
   .artist-card { height: 238px; min-height: 238px; }
   .artist-card-copy { padding-top: 2.2rem; }
+  .artist-era-cards,
+  .versus-setup .artist-era-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .55rem; }
 }

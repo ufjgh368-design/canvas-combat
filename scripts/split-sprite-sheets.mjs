@@ -5,7 +5,9 @@ import { createRequire } from "node:module";
 const require = createRequire(import.meta.url);
 const root = process.cwd();
 const sharp = require(resolve(root, "node_modules", ".pnpm", "sharp@0.34.5", "node_modules", "sharp"));
-const sourceDir = resolve(root, "work", "sprite-sheets");
+const sourceDir = process.argv[2]
+  ? resolve(root, process.argv[2])
+  : resolve(root, "work", "sprite-sheets");
 const outputDir = resolve(root, "assets", "characters");
 const frameNames = ["battle", "ultimate", "ko"];
 

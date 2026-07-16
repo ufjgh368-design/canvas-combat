@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { existsSync, readFileSync, statSync } from 'node:fs';
 import { createHash } from 'node:crypto';
-import { ARTISTS } from '../data/artists.js';
+import { ARTISTS,ARTIST_CATEGORY_GROUPS } from '../data/artists.js';
 
 test('34 位藝術家都有可用圖鑑角色圖',()=>{
   assert.equal(ARTISTS.length,34);
@@ -21,6 +21,14 @@ test('34 位藝術家各有攻擊、大絕與 KO 獨立影格',()=>{
       assert.ok(statSync(path).size>10000,`${artist.id} ${frame} too small`);
     }
   }
+});
+
+test('34 位藝術家依四大藝術史類別完整排列',()=>{
+  assert.deepEqual(ARTIST_CATEGORY_GROUPS.map(group=>group.label),['文藝復興','巴洛克與浪漫','印象與後印象','現代藝術革命']);
+  const groupedIds=ARTIST_CATEGORY_GROUPS.flatMap(group=>group.artistIds);
+  assert.equal(groupedIds.length,34);
+  assert.equal(new Set(groupedIds).size,34);
+  assert.deepEqual(ARTISTS.map(artist=>artist.id),groupedIds);
 });
 
 test('新增藝術家具有真正不同的三姿勢影格與 Boss 專屬動畫',()=>{
