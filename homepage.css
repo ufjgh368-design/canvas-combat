@@ -1,3 +1,5 @@
+@import url('selection.css');
+
 .intro {
   place-content: end center;
   padding: 1rem 1rem max(7vh, 3rem);
