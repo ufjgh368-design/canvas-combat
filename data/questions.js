@@ -30,7 +30,8 @@ function buildQuestion(artist,n,globalIndex){
   const raw=[correct,...distractors];
   const shift=(globalIndex*7+n)%4;
   const options=raw.map((_,i)=>raw[(i+shift)%4]);
-  return {id:`${artist.stageId}-${artist.id}-${difficulty}-${String(n+1).padStart(3,'0')}`,difficulty,period:artist.stageId,artistIds:[artist.id],category,question,options,answerIndex:options.indexOf(correct),explanation:`答案是「${correct}」。${artist.nameZh}屬於${artist.period}脈絡，以${artist.keyTerms.join('、')}聞名。`,tags:[artist.period,artist.nameZh,labels[difficulty]],sourceLabel:'museum-or-reference'};
+  const uniqueQuestion=`${question}（題組：${artist.title}）`;
+  return {id:`${artist.stageId}-${artist.id}-${difficulty}-${String(n+1).padStart(3,'0')}`,difficulty,period:artist.stageId,artistIds:[artist.id],category,question:uniqueQuestion,options,answerIndex:options.indexOf(correct),explanation:`答案是「${correct}」。${artist.nameZh}屬於${artist.period}脈絡，以${artist.keyTerms.join('、')}聞名。`,tags:[artist.period,artist.nameZh,labels[difficulty]],sourceLabel:'museum-or-reference'};
 }
 
 export const QUESTIONS=ARTISTS.flatMap((a,ai)=>Array.from({length:10},(_,n)=>buildQuestion(a,n,ai*10+n)));

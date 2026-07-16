@@ -5,8 +5,8 @@ Western Art History Knowledge Fighting RPG。純 HTML、CSS、JavaScript ES Modu
 ## 已完成內容
 
 - 11 個主選單入口：單人、雙人、Boss、藝術試煉、練習、教室、故事、圖鑑、排行榜、設定與存檔管理。
-- 25 位藝術家資料與 25 張生成式全身角色圖；缺圖仍有 SVG／Canvas 備援。
-- 250 題題庫，簡單、中等、困難各至少 60 題；固定四選一、附解析、選項動態洗牌且同場不重複。
+- 34 位藝術家資料與 34 張生成式全身角色圖；缺圖仍有 SVG／Canvas 備援。
+- 340 題題庫，簡單、中等、困難各至少 60 題；固定四選一、附解析、選項動態洗牌且同場不重複。
 - 真正的本機雙人輪流制，P1／P2 的 HP、能量、Combo、分數、大絕與答題狀態完全獨立。
 - 單局與三戰兩勝；第二小局由 P2 先攻，平手時進入輪流驟死題。
 - CPU 易／中／難有限狀態流程、策略選招、答題命中率、攻擊預警與反擊階段。
@@ -50,8 +50,8 @@ npm test
 
 ## 主要資料與素材
 
-- `data/artists.js`：25 位藝術家、招式、流派與圖鑑資料。
-- `data/questions.js`：250 題三級題庫及驗證器。
+- `data/artists.js`：34 位藝術家、招式、流派與圖鑑資料。
+- `data/questions.js`：340 題三級題庫及驗證器。
 - `assets/characters/`：18 張已生成角色全身圖。
 - `assets/prompts/artist-image-prompts.json`：完整角色圖提示詞。
 - `assets/ASSET_STATUS.md`：素材尺寸、授權與占位狀態。

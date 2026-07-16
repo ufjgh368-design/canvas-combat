@@ -4,8 +4,8 @@ import { existsSync, readFileSync, statSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import { ARTISTS } from '../data/artists.js';
 
-test('25 位藝術家都有可用圖鑑角色圖',()=>{
-  assert.equal(ARTISTS.length,25);
+test('34 位藝術家都有可用圖鑑角色圖',()=>{
+  assert.equal(ARTISTS.length,34);
   for(const artist of ARTISTS){
     const path=new URL(`../assets/characters/${artist.id}-gallery.png`,import.meta.url);
     assert.equal(existsSync(path),true,`${artist.id} missing`);
@@ -13,7 +13,7 @@ test('25 位藝術家都有可用圖鑑角色圖',()=>{
   }
 });
 
-test('25 位藝術家各有攻擊、大絕與 KO 獨立影格',()=>{
+test('34 位藝術家各有攻擊、大絕與 KO 獨立影格',()=>{
   for(const artist of ARTISTS){
     for(const frame of ['battle','ultimate','ko']){
       const path=new URL(`../assets/characters/${artist.id}-${frame}.webp`,import.meta.url);

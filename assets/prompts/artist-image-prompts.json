@@ -29,6 +29,15 @@
     {"id":"gauguin","name":"高更 Paul Gauguin","prompt":"19世紀旅行畫家服裝、平塗色面、象徵花葉與清楚輪廓，完整人物置於純洋紅去背背景。"},
     {"id":"munch","name":"孟克 Edvard Munch","prompt":"19世紀末挪威黑色長外套、心理波動線條、紅橙天空與深藍能量，完整人物置於純洋紅去背背景。"},
     {"id":"matisse","name":"馬諦斯 Henri Matisse","prompt":"20世紀藍色畫家外套、圓眼鏡、野獸派純色與剪紙造型環繞，完整人物置於純洋紅去背背景。"},
-    {"id":"pollock","name":"波洛克 Jackson Pollock","prompt":"20世紀美國工作服、行動繪畫姿勢、黑白琥珀滴彩軌跡，完整人物置於純洋紅去背背景。"}
+    {"id":"pollock","name":"波洛克 Jackson Pollock","prompt":"20世紀美國工作服、行動繪畫姿勢、黑白琥珀滴彩軌跡，完整人物置於純洋紅去背背景。"},
+    {"id":"giotto","name":"喬托 Giotto di Bondone","prompt":"14世紀義大利畫師長袍、濕壁畫顏料與金色光環元素、沉穩而富情感的施畫姿勢，完整人物置於純洋紅去背背景。"},
+    {"id":"donatello","name":"多納太羅 Donatello","prompt":"15世紀佛羅倫斯工匠服裝、青銅雕塑與鑿刀元素、結實而精準的雕刻戰鬥姿勢，完整人物置於純洋紅去背背景。"},
+    {"id":"jan-van-eyck","name":"揚・范・艾克 Jan van Eyck","prompt":"15世紀勃艮第宮廷黑色長袍與紅色頭巾、油畫層染微光與凸面鏡元素、細膩凝視姿勢，完整人物置於純洋紅去背背景。"},
+    {"id":"rubens","name":"魯本斯 Peter Paul Rubens","prompt":"17世紀佛蘭德斯華麗黑色服裝與白領、紅金巴洛克旋流與強烈動勢、充滿生命力的指揮姿勢，完整人物置於純洋紅去背背景。"},
+    {"id":"velazquez","name":"委拉斯奎茲 Diego Velázquez","prompt":"17世紀西班牙宮廷黑衣、銀色十字與調色盤、鏡面視線和冷暖光影、優雅沉著姿勢，完整人物置於純洋紅去背背景。"},
+    {"id":"delacroix","name":"德拉克洛瓦 Eugène Delacroix","prompt":"19世紀法國浪漫主義深色外套與紅色領巾、揮動三色旗般的色彩筆觸、激情前進姿勢，完整人物置於純洋紅去背背景。"},
+    {"id":"courbet","name":"庫爾貝 Gustave Courbet","prompt":"19世紀法國寫實主義畫家粗獷外套、岩石與大地色厚塗筆觸、堅定直視的沉重姿勢，完整人物置於純洋紅去背背景。"},
+    {"id":"manet","name":"馬奈 Édouard Manet","prompt":"19世紀巴黎黑色燕尾服與高帽、平面黑白色塊與現代咖啡館光影、瀟灑快速落筆姿勢，完整人物置於純洋紅去背背景。"},
+    {"id":"millet","name":"米勒 Jean-François Millet","prompt":"19世紀巴比松農村畫家樸素衣裝、麥穗與夕暮大地金光、如播種者般有力的姿勢，完整人物置於純洋紅去背背景。"}
   ]
 }
