@@ -20,6 +20,17 @@
   box-shadow: 0 14px 40px rgba(0, 0, 0, .75), 0 0 30px rgba(215, 180, 99, .3);
 }
 
+.intro::after {
+  content: '製作：思影藝術工作室 何至剛';
+  display: block;
+  margin-top: .85rem;
+  color: #e7c46a;
+  font-size: clamp(.78rem, 1.2vw, .95rem);
+  letter-spacing: .12em;
+  text-align: center;
+  text-shadow: 0 2px 10px #000;
+}
+
 @media (max-width: 760px) {
   .intro {
     padding-bottom: max(5vh, 2rem);
