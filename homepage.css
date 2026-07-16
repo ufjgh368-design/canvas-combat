@@ -68,7 +68,11 @@
   justify-items: center;
   gap: .8rem;
   padding: 1rem;
-  background: #02040a;
+  background:
+    linear-gradient(rgba(2, 4, 10, .82), rgba(2, 4, 10, .92)),
+    url('public/og.png') center / cover no-repeat,
+    url('/og.png') center / cover no-repeat,
+    #02040a;
 }
 .intro-video[hidden] { display: none; }
 .intro-video-frame {

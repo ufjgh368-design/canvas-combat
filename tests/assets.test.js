@@ -52,9 +52,11 @@ test('主選單與戰鬥背景已建立，並與進場封面分離',()=>{
 test('進入展廳會播放指定影片並提供結束與略過流程',()=>{
   const index=readFileSync(new URL('../index.html',import.meta.url),'utf8');
   const main=readFileSync(new URL('../js/main.js',import.meta.url),'utf8');
+  const homepage=readFileSync(new URL('../homepage.css',import.meta.url),'utf8');
   assert.match(index,/id="introVideoPlayer"/);
   assert.match(index,/id="skipVideo"/);
   assert.match(main,/INTRO_VIDEO_ID='ggVejS6dfq0'/);
   assert.match(main,/PlayerState\.ENDED/);
   assert.match(main,/onError:\(\)=>this\.finishIntroVideo\(\)/);
+  assert.match(homepage,/\.intro-video[\s\S]*url\('public\/og\.png'\)/);
 });
