@@ -46,6 +46,10 @@ export class BattleRenderer {
     this.stage = stage;
     this.particles = [];
     this.bossFx = null;
+    // The battle screen is hidden while the renderer is constructed. Measure it
+    // again after the screen becomes visible so images are not drawn to a 1px canvas.
+    this.fit();
+    requestAnimationFrame(() => this.fit());
     for (const fighter of fighters) {
       const artist = ARTIST_MAP[fighter.artistId];
       [artist.portrait, artist.battleSprite, artist.ultimateSprite, artist.koSprite]
@@ -294,4 +298,3 @@ export class BattleRenderer {
     removeEventListener('resize', this.resize);
   }
 }
-
