@@ -5,6 +5,7 @@
   padding: 1rem 1rem max(7vh, 3rem);
   background:
     linear-gradient(180deg, transparent 52%, rgba(5, 8, 17, .88) 100%),
+    url('public/og.png') center / cover no-repeat,
     url('/og.png') center / cover no-repeat,
     #050811;
 }
@@ -34,8 +35,8 @@
 @media (max-width: 760px) {
   .intro {
     padding-bottom: max(5vh, 2rem);
-    background-size: auto, contain, auto;
-    background-position: center, center 38%, center;
+    background-size: auto, contain, contain;
+    background-position: center, center 38%, center 38%;
   }
 }
 

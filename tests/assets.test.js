@@ -39,6 +39,12 @@ test('新增藝術家具有真正不同的三姿勢影格與 Boss 專屬動畫',
 
 test('主視覺背景已建立',()=>{
   const path=new URL('../assets/ui/main-visual-background.png',import.meta.url);
+  const ogPath=new URL('../public/og.png',import.meta.url);
   assert.equal(existsSync(path),true);
   assert.ok(statSync(path).size>500000);
+  assert.equal(
+    createHash('sha256').update(readFileSync(path)).digest('hex'),
+    createHash('sha256').update(readFileSync(ogPath)).digest('hex'),
+    '首頁背景必須與 public/og.png 完全相同',
+  );
 });
