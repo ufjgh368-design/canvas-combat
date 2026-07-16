@@ -22,6 +22,13 @@
     {"id":"kandinsky","name":"康丁斯基 Wassily Kandinsky","prompt":"包浩斯時期正式服裝，抽象幾何、色彩音符、圓與線形成宇宙構成。"},
     {"id":"dali","name":"達利 Salvador Dalí","prompt":"超現實主義黑西裝與標誌性翹鬍，融化時計、長腳象剪影與夢境沙色光。"},
     {"id":"frida","name":"芙烈達・卡蘿 Frida Kahlo","prompt":"墨西哥特瓦納服飾與花冠，荊棘、雙重自我鏡像、植物生命力，尊重真實文化。"},
-    {"id":"warhol","name":"安迪・沃荷 Andy Warhol","prompt":"1960年代紐約黑高領與銀白髮，絲網印刷錯版色、漫畫網點與重複色塊。"}
+    {"id":"warhol","name":"安迪・沃荷 Andy Warhol","prompt":"1960年代紐約黑高領與銀白髮，絲網印刷錯版色、漫畫網點與重複色塊。"},
+    {"id":"botticelli","name":"波提切利 Sandro Botticelli","prompt":"15世紀佛羅倫斯華麗長袍、飄動長髮、優雅線條與春之花葉寓意，完整人物置於純洋紅去背背景。"},
+    {"id":"titian","name":"提香 Titian","prompt":"16世紀威尼斯黑帽與深紅長袍、成熟鬍鬚、層疊油彩與金紅色光，完整人物置於純洋紅去背背景。"},
+    {"id":"renoir","name":"雷諾瓦 Pierre-Auguste Renoir","prompt":"19世紀法國畫家服裝、暖色人物光斑、花園舞會筆觸與玫瑰色光，完整人物置於純洋紅去背背景。"},
+    {"id":"gauguin","name":"高更 Paul Gauguin","prompt":"19世紀旅行畫家服裝、平塗色面、象徵花葉與清楚輪廓，完整人物置於純洋紅去背背景。"},
+    {"id":"munch","name":"孟克 Edvard Munch","prompt":"19世紀末挪威黑色長外套、心理波動線條、紅橙天空與深藍能量，完整人物置於純洋紅去背背景。"},
+    {"id":"matisse","name":"馬諦斯 Henri Matisse","prompt":"20世紀藍色畫家外套、圓眼鏡、野獸派純色與剪紙造型環繞，完整人物置於純洋紅去背背景。"},
+    {"id":"pollock","name":"波洛克 Jackson Pollock","prompt":"20世紀美國工作服、行動繪畫姿勢、黑白琥珀滴彩軌跡，完整人物置於純洋紅去背背景。"}
   ]
 }
