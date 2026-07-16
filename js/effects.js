@@ -66,19 +66,34 @@ export class BattleRenderer {
     this.hit = { side, move, start: performance.now(), duration, impacted: false, onImpact };
   }
 
+  bossStyle() {
+    const artist = ARTIST_MAP[this.fighters[1]?.artistId];
+    return artist?.bossVariant || {
+      animation: 'frame-fold',
+      colors: ['#e7c46a', '#ef315d', '#65f5ee'],
+      phaseNames: ['典藏甦醒', '畫境暴走', '終極名作'],
+    };
+  }
+
   bossTransition(phase) {
-    this.bossFx = { type: 'phase', phase, start: performance.now(), duration: 1700 };
-    this.burst(this.w * .75, this.h * .5, phase === 3 ? '#ef315d' : '#e7c46a', phase === 3 ? 130 : 85);
+    const style = this.bossStyle();
+    const color = style.colors?.[(phase - 1) % style.colors.length] || '#e7c46a';
+    this.bossFx = { type: 'phase', phase, style, start: performance.now(), duration: 1700 };
+    this.burst(this.w * .75, this.h * .5, color, phase === 3 ? 130 : 85);
   }
 
   bossShieldBreak() {
-    this.bossFx = { type: 'shield', phase: 0, start: performance.now(), duration: 1050 };
-    this.burst(this.w * .75, this.h * .52, '#52e5e0', 110);
+    const style = this.bossStyle();
+    const color = style.colors?.[1] || '#52e5e0';
+    this.bossFx = { type: 'shield', phase: 0, style, start: performance.now(), duration: 1050 };
+    this.burst(this.w * .75, this.h * .52, color, 110);
   }
 
   bossDefeat() {
-    this.bossFx = { type: 'defeat', phase: 3, start: performance.now(), duration: 1600 };
-    this.burst(this.w * .75, this.h * .5, '#e7c46a', 180);
+    const style = this.bossStyle();
+    const color = style.colors?.[2] || style.colors?.[0] || '#e7c46a';
+    this.bossFx = { type: 'defeat', phase: 3, style, start: performance.now(), duration: 1600 };
+    this.burst(this.w * .75, this.h * .5, color, 180);
   }
 
   burst(x, y, color, count = 24) {
@@ -230,14 +245,41 @@ export class BattleRenderer {
     const c = this.ctx;
     const p = Math.min(1, (performance.now() - this.bossFx.start) / this.bossFx.duration);
     if (this.bossFx.type === 'phase') {
+      const style = this.bossFx.style || this.bossStyle();
+      const colors = style.colors?.length ? style.colors : ['#e7c46a', '#ef315d', '#65f5ee'];
+      const motif = style.animation || 'frame-fold';
       c.save();
       c.translate(this.w * .75, this.h * .48);
-      c.strokeStyle = this.bossFx.phase === 3 ? '#ef315d' : '#e7c46a';
       c.lineWidth = 5;
       c.globalAlpha = Math.sin(p * Math.PI);
-      for (let ring = 0; ring < (this.bossFx.phase === 3 ? 6 : 4); ring += 1) {
-        c.rotate(.22 + p * .08);
-        c.strokeRect(-65 - ring * 18, -100 - ring * 18, 130 + ring * 36, 200 + ring * 36);
+      const count = this.bossFx.phase === 3 ? 12 : 8;
+      for (let ring = 0; ring < count; ring += 1) {
+        const color = colors[ring % colors.length];
+        const angle = (Math.PI * 2 * ring) / count + p * (ring % 2 ? -2 : 2);
+        c.strokeStyle = color;
+        c.fillStyle = color;
+        if (motif === 'floral-vortex') {
+          c.save(); c.rotate(angle); c.beginPath(); c.ellipse(0, -55 - ring * 8, 18 + ring, 42, 0, 0, Math.PI * 2); c.stroke(); c.restore();
+        } else if (motif === 'color-vortex') {
+          c.beginPath(); c.arc(0, 0, 45 + ring * 14, angle, angle + Math.PI * .7); c.stroke();
+        } else if (motif === 'light-bloom') {
+          c.globalAlpha = Math.sin(p * Math.PI) * (.18 + (ring % 3) * .12);
+          c.beginPath(); c.arc(Math.cos(angle) * (55 + ring * 9), Math.sin(angle) * (35 + ring * 6), 18 + ring * 2, 0, Math.PI * 2); c.fill();
+        } else if (motif === 'symbol-bloom') {
+          c.save(); c.rotate(angle); c.strokeRect(-18 - ring * 3, -58 - ring * 10, 36 + ring * 6, 36 + ring * 6); c.restore();
+        } else if (motif === 'anxiety-wave') {
+          c.beginPath();
+          for (let x = -170; x <= 170; x += 10) c.lineTo(x, Math.sin(x * .045 + p * 12 + ring) * (16 + ring * 3) + (ring - count / 2) * 7);
+          c.stroke();
+        } else if (motif === 'cutout-dance') {
+          c.save(); c.rotate(angle); c.beginPath(); c.ellipse(0, -48 - ring * 10, 13 + ring, 34 + ring * 2, .5, 0, Math.PI * 2); c.fill(); c.restore();
+        } else if (motif === 'drip-storm') {
+          const x = -150 + (ring / Math.max(1, count - 1)) * 300;
+          c.lineWidth = 3 + (ring % 4) * 2; c.beginPath(); c.moveTo(x, -150); c.bezierCurveTo(x + 35, -60, x - 30, 25, x + Math.sin(p * 9 + ring) * 35, 170); c.stroke();
+          c.beginPath(); c.arc(x + Math.sin(ring) * 25, 120 - ring * 8, 5 + ring % 4, 0, Math.PI * 2); c.fill();
+        } else {
+          c.save(); c.rotate(angle * .35); c.strokeRect(-65 - ring * 12, -100 - ring * 12, 130 + ring * 24, 200 + ring * 24); c.restore();
+        }
       }
       c.restore();
     }
@@ -248,15 +290,20 @@ export class BattleRenderer {
     const c = this.ctx;
     const p = Math.min(1, (performance.now() - this.bossFx.start) / this.bossFx.duration);
     const pulse = Math.sin(p * Math.PI);
+    const style = this.bossFx.style || this.bossStyle();
+    const colors = style.colors?.length ? style.colors : ['#e7c46a', '#ef315d', '#65f5ee'];
     if (this.bossFx.type === 'phase') {
-      c.fillStyle = this.settings.reducedFlash ? '#120b2066' : `${this.bossFx.phase === 3 ? '#7a0d3d' : '#8c6722'}${Math.round(pulse * 95).toString(16).padStart(2, '0')}`;
+      c.save();
+      c.globalAlpha = this.settings.reducedFlash ? .1 : pulse * .25;
+      c.fillStyle = colors[(this.bossFx.phase - 1) % colors.length];
       c.fillRect(0, 0, this.w, this.h);
+      c.restore();
       c.fillStyle = '#f7e7b2';
       c.textAlign = 'center';
       c.font = `900 ${Math.max(24, this.w * .045)}px Georgia`;
-      c.fillText(`BOSS PHASE ${this.bossFx.phase}`, this.w / 2, this.h * .24);
+      c.fillText(style.phaseNames?.[this.bossFx.phase - 1] || `BOSS PHASE ${this.bossFx.phase}`, this.w / 2, this.h * .24);
     } else if (this.bossFx.type === 'shield') {
-      c.strokeStyle = '#65f5ee';
+      c.strokeStyle = colors[1] || colors[0];
       c.lineWidth = 8;
       c.globalAlpha = 1 - p;
       c.beginPath();
@@ -264,8 +311,11 @@ export class BattleRenderer {
       c.stroke();
       c.globalAlpha = 1;
     } else if (this.bossFx.type === 'defeat') {
-      c.fillStyle = `rgba(231,196,106,${pulse * .28})`;
+      c.save();
+      c.globalAlpha = pulse * .28;
+      c.fillStyle = colors[2] || colors[0];
       c.fillRect(0, 0, this.w, this.h);
+      c.restore();
       c.fillStyle = '#fff1bd';
       c.textAlign = 'center';
       c.font = `900 ${Math.max(28, this.w * .05)}px Georgia`;

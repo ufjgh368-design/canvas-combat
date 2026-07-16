@@ -29,4 +29,14 @@ export const ARTISTS = [
 for(const artist of ARTISTS)artist.portrait=`assets/characters/${artist.id}-gallery.png`;
 const daliBoss=ARTISTS.find(artist=>artist.id==='dali');
 if(daliBoss)daliBoss.bossVariant={maxHp:240,phaseThresholds:[.7,.35],shield:[30,25,35],phaseNames:['融化序曲','夢境畫框','記憶永恆'],defeatAnimation:'masterpiece-break'};
+const NEW_BOSS_VARIANTS={
+  botticelli:{maxHp:220,shield:[25,30,35],phaseNames:['春風甦醒','維納斯浪潮','黃金寓言庭園'],animation:'floral-vortex',colors:['#c85f72','#f2c66d','#58a985']},
+  titian:{maxHp:260,shield:[35,35,45],phaseNames:['緋紅底層','威尼斯烈彩','提香金焰'],animation:'color-vortex',colors:['#8e2e2a','#e0a53b','#315a92']},
+  renoir:{maxHp:220,shield:[25,25,35],phaseNames:['玫瑰光斑','舞會旋彩','塞納歡宴'],animation:'light-bloom',colors:['#e58f91','#f4d79a','#7baec4']},
+  gauguin:{maxHp:250,shield:[30,35,40],phaseNames:['海島色域','象徵輪廓','永恆之問'],animation:'symbol-bloom',colors:['#d47732','#1e5972','#d24d43']},
+  munch:{maxHp:270,shield:[35,40,45],phaseNames:['焦慮波紋','生命震顫','無聲吶喊'],animation:'anxiety-wave',colors:['#d94b3d','#ef8b32','#18385d']},
+  matisse:{maxHp:240,shield:[30,30,40],phaseNames:['野獸色塊','剪紙飛舞','紅色畫室'],animation:'cutout-dance',colors:['#2878c8','#df3f2f','#5b9a57']},
+  pollock:{maxHp:280,shield:[35,45,50],phaseNames:['滴彩起勢','行動畫布','秋韻風暴'],animation:'drip-storm',colors:['#171717','#d79b32','#e8e5d8']}
+};
+for(const [id,variant] of Object.entries(NEW_BOSS_VARIANTS)){const artist=ARTISTS.find(item=>item.id===id);if(artist)artist.bossVariant={...variant,phaseThresholds:[.7,.35],defeatAnimation:`${variant.animation}-break`};}
 export const ARTIST_MAP = Object.fromEntries(ARTISTS.map(a=>[a.id,a]));

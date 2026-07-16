@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { existsSync, statSync } from 'node:fs';
+import { existsSync, readFileSync, statSync } from 'node:fs';
+import { createHash } from 'node:crypto';
 import { ARTISTS } from '../data/artists.js';
 
 test('25 位藝術家都有可用圖鑑角色圖',()=>{
@@ -19,6 +20,20 @@ test('25 位藝術家各有攻擊、大絕與 KO 獨立影格',()=>{
       assert.equal(existsSync(path),true,`${artist.id} ${frame} missing`);
       assert.ok(statSync(path).size>10000,`${artist.id} ${frame} too small`);
     }
+  }
+});
+
+test('新增藝術家具有真正不同的三姿勢影格與 Boss 專屬動畫',()=>{
+  const ids=['botticelli','titian','renoir','gauguin','munch','matisse','pollock'];
+  for(const id of ids){
+    const artist=ARTISTS.find(item=>item.id===id);
+    assert.ok(artist?.bossVariant?.animation,`${id} boss animation missing`);
+    assert.equal(artist.bossVariant.phaseNames.length,3,`${id} boss phase names missing`);
+    const hashes=['battle','ultimate','ko'].map(frame=>{
+      const path=new URL(`../assets/characters/${id}-${frame}.webp`,import.meta.url);
+      return createHash('sha256').update(readFileSync(path)).digest('hex');
+    });
+    assert.equal(new Set(hashes).size,3,`${id} frames are duplicated`);
   }
 });
 
