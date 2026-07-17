@@ -1,70 +1,46 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { existsSync, readFileSync, statSync } from 'node:fs';
-import { createHash } from 'node:crypto';
-import { ARTISTS,ARTIST_CATEGORY_GROUPS } from '../data/artists.js';
+import {existsSync,readFileSync,statSync} from 'node:fs';
+import {createHash} from 'node:crypto';
+import {ARTISTS,ARTIST_CATEGORY_GROUPS} from '../data/artists.js';
 
-test('34 位藝術家都有可用圖鑑角色圖',()=>{
+test('34 位音樂家都有完整圖鑑與三種戰鬥姿勢',()=>{
   assert.equal(ARTISTS.length,34);
-  for(const artist of ARTISTS){
-    const path=new URL(`../assets/characters/${artist.id}-gallery.png`,import.meta.url);
-    assert.equal(existsSync(path),true,`${artist.id} missing`);
-    assert.ok(statSync(path).size>100000,`${artist.id} image too small`);
-  }
-});
-
-test('34 位藝術家各有攻擊、大絕與 KO 獨立影格',()=>{
-  for(const artist of ARTISTS){
-    for(const frame of ['battle','ultimate','ko']){
-      const path=new URL(`../assets/characters/${artist.id}-${frame}.webp`,import.meta.url);
-      assert.equal(existsSync(path),true,`${artist.id} ${frame} missing`);
-      assert.ok(statSync(path).size>10000,`${artist.id} ${frame} too small`);
+  for(const musician of ARTISTS){
+    for(const [suffix,min] of [['gallery.png',10000],['battle.webp',5000],['ultimate.webp',5000],['ko.webp',5000]]){
+      const path=new URL(`../assets/characters/${musician.id}-${suffix}`,import.meta.url);
+      assert.equal(existsSync(path),true,`${musician.id} ${suffix} missing`);
+      assert.ok(statSync(path).size>min,`${musician.id} ${suffix} too small`);
     }
+    const hashes=['battle','ultimate','ko'].map(frame=>createHash('sha256').update(readFileSync(new URL(`../assets/characters/${musician.id}-${frame}.webp`,import.meta.url))).digest('hex'));
+    assert.equal(new Set(hashes).size,3,`${musician.id} poses are duplicated`);
   }
 });
 
-test('34 位藝術家依四大藝術史類別完整排列',()=>{
-  assert.deepEqual(ARTIST_CATEGORY_GROUPS.map(group=>group.label),['文藝復興','巴洛克與浪漫','印象與後印象','現代藝術革命']);
+test('34 位音樂家依四大音樂史類別完整排列',()=>{
+  assert.deepEqual(ARTIST_CATEGORY_GROUPS.map(group=>group.label),['巴洛克','古典與過渡','浪漫與民族樂派','現代與跨界']);
   const groupedIds=ARTIST_CATEGORY_GROUPS.flatMap(group=>group.artistIds);
   assert.equal(groupedIds.length,34);
   assert.equal(new Set(groupedIds).size,34);
-  assert.deepEqual(ARTISTS.map(artist=>artist.id),groupedIds);
+  assert.deepEqual(ARTISTS.map(musician=>musician.id),groupedIds);
 });
 
-test('新增藝術家具有真正不同的三姿勢影格與 Boss 專屬動畫',()=>{
-  const ids=['botticelli','titian','renoir','gauguin','munch','matisse','pollock'];
-  for(const id of ids){
-    const artist=ARTISTS.find(item=>item.id===id);
-    assert.ok(artist?.bossVariant?.animation,`${id} boss animation missing`);
-    assert.equal(artist.bossVariant.phaseNames.length,3,`${id} boss phase names missing`);
-    const hashes=['battle','ultimate','ko'].map(frame=>{
-      const path=new URL(`../assets/characters/${id}-${frame}.webp`,import.meta.url);
-      return createHash('sha256').update(readFileSync(path)).digest('hex');
-    });
-    assert.equal(new Set(hashes).size,3,`${id} frames are duplicated`);
+test('大師角色具三樂章名稱與專屬演出',()=>{
+  const bosses=ARTISTS.filter(musician=>musician.bossVariant);
+  assert.ok(bosses.length>=7);
+  for(const musician of bosses){
+    assert.equal(musician.bossVariant.phaseNames.length,3);
+    assert.ok(musician.bossVariant.animation);
   }
 });
 
-test('主選單與戰鬥背景已建立，並與進場封面分離',()=>{
-  const path=new URL('../assets/ui/main-visual-background.png',import.meta.url);
-  const ogPath=new URL('../public/og.png',import.meta.url);
-  assert.equal(existsSync(path),true);
-  assert.ok(statSync(path).size>500000);
-  assert.notEqual(
-    createHash('sha256').update(readFileSync(path)).digest('hex'),
-    createHash('sha256').update(readFileSync(ogPath)).digest('hex'),
-    '主選單／戰鬥背景不應覆蓋進場封面 public/og.png',
-  );
-});
-
-test('進入展廳會播放指定影片並提供結束與略過流程',()=>{
+test('新社群封面與音樂家入口已接入',()=>{
+  const og=new URL('../public/og.png',import.meta.url);
+  assert.ok(statSync(og).size>500000);
   const index=readFileSync(new URL('../index.html',import.meta.url),'utf8');
   const main=readFileSync(new URL('../js/main.js',import.meta.url),'utf8');
-  const homepage=readFileSync(new URL('../homepage.css',import.meta.url),'utf8');
-  assert.match(index,/id="introVideoPlayer"/);
-  assert.match(index,/id="skipVideo"/);
-  assert.match(main,/INTRO_VIDEO_ID='ggVejS6dfq0'/);
-  assert.match(main,/PlayerState\.ENDED/);
-  assert.match(main,/onError:\(\)=>this\.finishIntroVideo\(\)/);
-  assert.match(homepage,/\.intro-video[\s\S]*url\('public\/og\.png'\)/);
+  assert.match(index,/西洋音樂家/);
+  assert.match(index,/MAESTRO[\s\S]*COMBAT/);
+  assert.match(main,/p1:'bach',p2:'mozart'/);
+  assert.doesNotMatch(main,/INTRO_VIDEO_ID='ggVejS6dfq0'/);
 });

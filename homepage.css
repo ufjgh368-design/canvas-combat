@@ -22,7 +22,7 @@
 }
 
 .intro::after {
-  content: '製作：思影藝術工作室 何至剛';
+  content: '製作：思影藝術工作室 何至剛｜MAESTRO COMBAT';
   display: block;
   margin-top: .85rem;
   color: #e7c46a;
@@ -42,8 +42,9 @@
 
 #home {
   background:
-    linear-gradient(180deg, rgba(5, 8, 17, .2), rgba(5, 8, 17, .94)),
-    url('assets/ui/main-visual-background.png') center top / cover fixed,
+    radial-gradient(circle at 50% 18%, rgba(215,180,99,.24), transparent 26%),
+    repeating-linear-gradient(90deg, transparent 0 8.2%, rgba(255,255,255,.018) 8.3% 8.45%),
+    linear-gradient(180deg, rgba(5, 8, 17, .2), rgba(5, 8, 17, .96)),
     #050811;
 }
 

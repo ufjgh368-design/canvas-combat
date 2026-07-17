@@ -1,7 +1,7 @@
 /* Museum submenu and expanded character-selection presentation. */
 .submenu-screen {
   position: relative;
-  background: linear-gradient(180deg, #0509149c, #050914e8), url('assets/ui/main-visual-background.png') center / cover fixed no-repeat;
+  background: radial-gradient(circle at 50% 12%, #d7b46324, transparent 28%), linear-gradient(180deg, #050914d8, #050914f5);
 }
 .submenu-screen::before {
   content: '';
@@ -92,7 +92,7 @@
 #setup.submenu-screen,
 #content.submenu-screen {
   background-color: #07101d;
-  background-image: linear-gradient(180deg, #05091440, #050914a8), url('./assets/ui/main-visual-background.png') !important;
+  background-image: radial-gradient(circle at 50% 12%, #d7b46324, transparent 28%), repeating-linear-gradient(90deg, transparent 0 10%, #ffffff08 10.1% 10.2%), linear-gradient(180deg, #05091480, #050914e8) !important;
   background-position: center top !important;
   background-size: cover !important;
   background-repeat: no-repeat !important;

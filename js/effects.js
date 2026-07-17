@@ -7,14 +7,14 @@ export class BattleRenderer {
     this.ctx = canvas.getContext('2d');
     this.settings = settings;
     this.fighters = [];
-    this.stage = 'renaissance';
+    this.stage = 'baroque';
     this.particles = [];
     this.running = false;
     this.hit = null;
     this.bossFx = null;
     this.time = 0;
     this.images = new Map();
-    this.background = this.loadImage('assets/ui/main-visual-background.png');
+    this.background = null;
     this.resize = () => this.fit();
     addEventListener('resize', this.resize);
     this.fit();
@@ -69,9 +69,9 @@ export class BattleRenderer {
   bossStyle() {
     const artist = ARTIST_MAP[this.fighters[1]?.artistId];
     return artist?.bossVariant || {
-      animation: 'frame-fold',
+      animation: 'counterpoint-orbit',
       colors: ['#e7c46a', '#ef315d', '#65f5ee'],
-      phaseNames: ['典藏甦醒', '畫境暴走', '終極名作'],
+      phaseNames: ['序奏甦醒', '樂章暴走', '終極交響'],
     };
   }
 
@@ -132,7 +132,7 @@ export class BattleRenderer {
     const c = this.ctx;
     const w = this.w;
     const h = this.h;
-    const stage = STAGES[this.stage] || STAGES.renaissance;
+    const stage = STAGES[this.stage] || STAGES.baroque;
     if (!this.drawCover(this.background)) {
       const gradient = c.createLinearGradient(0, 0, 0, h);
       gradient.addColorStop(0, stage.colors[0]);
@@ -225,9 +225,12 @@ export class BattleRenderer {
     c.save();
     c.translate(x, groundY);
     if (index === 1) c.scale(-1, 1);
+    const pulse = 1 + Math.sin(this.time / 260) * .025;
+    c.scale(pulse, pulse);
     c.fillStyle = '#05070c';
     c.strokeStyle = artist.color;
     c.lineWidth = 4;
+    // 指揮家輪廓：頭、燕尾服、抬起的指揮棒與音符徽章。
     c.beginPath();
     c.arc(0, -105, 27, 0, Math.PI * 2);
     c.moveTo(-26, -78);
@@ -237,6 +240,21 @@ export class BattleRenderer {
     c.closePath();
     c.fill();
     c.stroke();
+    c.beginPath();
+    c.moveTo(18, -66);
+    c.lineTo(70, -132);
+    c.stroke();
+    c.fillStyle = artist.color;
+    c.beginPath();
+    c.arc(-12, -48, 11, 0, Math.PI * 2);
+    c.fill();
+    c.fillStyle = '#fff8df';
+    c.font = '700 16px Georgia';
+    c.textAlign = 'center';
+    c.fillText('♪', -12, -42);
+    c.scale(index === 1 ? -1 : 1, 1);
+    c.font = '700 14px system-ui';
+    c.fillText(artist.nameZh.slice(0, 2), 0, 22);
     c.restore();
   }
 
@@ -319,7 +337,7 @@ export class BattleRenderer {
       c.fillStyle = '#fff1bd';
       c.textAlign = 'center';
       c.font = `900 ${Math.max(28, this.w * .05)}px Georgia`;
-      c.fillText('MASTERPIECE BREAK', this.w / 2, this.h * .3);
+      c.fillText('MAESTRO FINALE', this.w / 2, this.h * .3);
     }
     if (p >= 1) this.bossFx = null;
   }

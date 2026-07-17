@@ -10,7 +10,7 @@ const renderer={},audio={tone(){},startBgm(){},stopBgm(){},duck(){}};
   const game=new Game(app,renderer,audio);
   game.config={mode:'versus',roundsToWin:2};
   game.scope=new SessionScope();
-  game.fighters=[createFighter({id:'p1',playerName:'P1',artistId:'leonardo'}),createFighter({id:'p2',playerName:'P2',artistId:'raphael'})];
+  game.fighters=[createFighter({id:'p1',playerName:'P1',artistId:'bach'}),createFighter({id:'p2',playerName:'P2',artistId:'mozart'})];
   game.beginTurn=()=>{};
   return {game,get continued(){return continued},get finished(){return finished}};
 }

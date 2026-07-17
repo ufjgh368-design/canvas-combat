@@ -55,7 +55,7 @@ export class AudioSystem {
   startSynth(theme) {
     if (!this.ctx || !this.settings.bgmEnabled || this.bgmTimer) return;
     const scales = {
-      renaissance: [261, 329, 392, 523], baroque: [220, 277, 330, 440],
+      renaissance: [261, 329, 392, 523], baroque: [220, 277, 330, 440], classical: [261, 330, 392, 494],
       romantic: [196, 247, 294, 392], impressionist: [293, 349, 440, 523],
       postimpressionist: [246, 311, 370, 493], modern: [220, 261, 329, 415],
       surreal: [185, 233, 311, 370], boss: [146, 220, 293, 349],

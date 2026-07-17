@@ -4,13 +4,12 @@ export default function Home() {
       <iframe
         className="game-frame"
         src="/game/index.html"
-        title="西洋藝術大亂鬥：Canvas Combat"
+        title="西洋音樂家知識格鬥：Maestro Combat"
         allow="autoplay; fullscreen"
       />
       <noscript>
-        <a href="/game/index.html">開啟 Canvas Combat</a>
+        <a href="/game/index.html">開啟 Maestro Combat</a>
       </noscript>
     </main>
   );
 }
-

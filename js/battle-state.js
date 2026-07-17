@@ -1,4 +1,4 @@
-export const MOVES={light:{id:'light',label:'輕攻擊',damage:8,difficulty:'easy',defenseEnergy:5,key:'Q'},heavy:{id:'heavy',label:'重攻擊',damage:16,difficulty:'medium',defenseEnergy:8,key:'W'},ultimate:{id:'ultimate',label:'大絕招',damage:32,difficulty:'hard',defenseEnergy:12,key:'E',cost:100}};
+export const MOVES={light:{id:'light',label:'主題動機',damage:8,difficulty:'easy',defenseEnergy:5,key:'Q'},heavy:{id:'heavy',label:'樂章重擊',damage:16,difficulty:'medium',defenseEnergy:8,key:'W'},ultimate:{id:'ultimate',label:'終極交響',damage:32,difficulty:'hard',defenseEnergy:12,key:'E',cost:100}};
 
 export function createFighter({id,type='human',playerName,artistId,maxHp=100}){
   return {id,type,playerName,artistId,hp:maxHp,maxHp,energy:0,maxEnergy:100,combo:0,maxCombo:0,score:0,correctCount:0,wrongCount:0,timeoutCount:0,damageDealt:0,damageReceived:0,currentSkill:null,ultimateUnlocked:false,statusEffects:[],roundsWon:0,isActiveTurn:false,answerHistory:[]};
