@@ -1,1 +1,22 @@
-export const STAGES={baroque:{name:'燭光巴洛克歌劇院',colors:['#120f18','#4b1d25','#d09b55']},classical:{name:'維也納金色音樂廳',colors:['#17233d','#765a3d','#d5ba73']},romantic:{name:'浪漫派風暴舞台',colors:['#111827','#3f5268','#ef7f4d']},modern:{name:'現代聲響實驗劇場',colors:['#20183b','#4353c8','#e54f63']}};
+export const STAGES={
+  baroque:{
+    name:'燭光巴洛克歌劇院',
+    image:'assets/stages/baroque.webp',
+    colors:['#120f18','#4b1d25','#d09b55'],
+  },
+  classical:{
+    name:'維也納金色音樂廳',
+    image:'assets/stages/classical.webp',
+    colors:['#17233d','#765a3d','#d5ba73'],
+  },
+  romantic:{
+    name:'浪漫派風暴舞台',
+    image:'assets/stages/romantic.webp',
+    colors:['#111827','#3f5268','#ef7f4d'],
+  },
+  modern:{
+    name:'現代聲響實驗劇場',
+    image:'assets/stages/modern.webp',
+    colors:['#20183b','#4353c8','#e54f63'],
+  },
+};

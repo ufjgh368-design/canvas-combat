@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import {existsSync,readFileSync,statSync} from 'node:fs';
 import {createHash} from 'node:crypto';
 import {ARTISTS,ARTIST_CATEGORY_GROUPS} from '../data/artists.js';
+import {STAGES} from '../data/stages.js';
 
 test('37 位音樂家都有完整圖鑑與三種戰鬥姿勢',()=>{
   assert.equal(ARTISTS.length,37);
@@ -53,4 +54,16 @@ test('進入音樂殿堂會播放指定影片並可結束或略過',()=>{
   assert.match(main,/videoId:'ZOabJpM7yIw'/);
   assert.match(main,/YT\.PlayerState\.ENDED/);
   assert.match(main,/onError:[\s\S]*影片目前無法嵌入播放/);
+});
+
+test('四個音樂時期都有專屬舞台背景圖',()=>{
+  assert.deepEqual(Object.keys(STAGES),['baroque','classical','romantic','modern']);
+  for(const [stageId,stage] of Object.entries(STAGES)){
+    assert.equal(stage.image,`assets/stages/${stageId}.webp`);
+    const path=new URL(`../${stage.image}`,import.meta.url);
+    assert.equal(existsSync(path),true,`${stageId} stage missing`);
+    assert.ok(statSync(path).size>200000,`${stageId} stage too small`);
+  }
+  const renderer=readFileSync(new URL('../js/effects.js',import.meta.url),'utf8');
+  assert.match(renderer,/this\.background = this\.loadImage/);
 });

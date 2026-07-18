@@ -44,6 +44,7 @@ export class BattleRenderer {
   setBattle(fighters, stage) {
     this.fighters = fighters;
     this.stage = stage;
+    this.background = this.loadImage((STAGES[stage] || STAGES.baroque).image);
     this.particles = [];
     this.bossFx = null;
     // The battle screen is hidden while the renderer is constructed. Measure it
