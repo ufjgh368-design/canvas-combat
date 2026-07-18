@@ -20,7 +20,7 @@ function buildQuestion(artist,n,globalIndex){
 
   switch(n){
     case 0:
-      question=`【記憶】《${work}》最主要與哪位音樂家相關？`;
+      question=`【記憶】在${artist.period}音樂脈絡中，《${work}》最主要與哪位音樂家相關？`;
       correct=artist.nameZh;
       candidates=other.map(item=>item.nameZh);
       explanation=`《${work}》是${artist.nameZh}的代表作品之一。`;
@@ -83,6 +83,7 @@ function buildQuestion(artist,n,globalIndex){
   const raw=choices(correct,candidates,['巴洛克早期／歌劇與牧歌','二十世紀／極簡主義','法國','義大利']);
   const shift=(globalIndex*7+n)%4;
   const options=raw.map((_,index)=>raw[(index+shift)%4]);
+  const safeQuestion=correct===artist.nameZh ? question.replaceAll(artist.nameZh,'') : question;
   return {
     id:`${artist.stageId}-${artist.id}-${difficulty}-${String(n+1).padStart(3,'0')}`,
     difficulty,
@@ -90,7 +91,7 @@ function buildQuestion(artist,n,globalIndex){
     artistIds:[artist.id],
     category:questionType,
     questionType,
-    question:`${question}（${artist.nameZh}）`,
+    question:safeQuestion,
     options,
     answerIndex:options.indexOf(correct),
     explanation:`答案是「${correct}」。${explanation}`,
