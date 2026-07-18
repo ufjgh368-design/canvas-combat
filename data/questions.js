@@ -90,7 +90,7 @@ function buildQuestion(artist,n,globalIndex){
     artistIds:[artist.id],
     category:questionType,
     questionType,
-    question:`${question}（題組：${artist.nameZh}）`,
+    question:`${question}（${artist.nameZh}）`,
     options,
     answerIndex:options.indexOf(correct),
     explanation:`答案是「${correct}」。${explanation}`,
