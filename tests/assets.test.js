@@ -4,8 +4,8 @@ import {existsSync,readFileSync,statSync} from 'node:fs';
 import {createHash} from 'node:crypto';
 import {ARTISTS,ARTIST_CATEGORY_GROUPS} from '../data/artists.js';
 
-test('34 位音樂家都有完整圖鑑與三種戰鬥姿勢',()=>{
-  assert.equal(ARTISTS.length,34);
+test('37 位音樂家都有完整圖鑑與三種戰鬥姿勢',()=>{
+  assert.equal(ARTISTS.length,37);
   for(const musician of ARTISTS){
     for(const [suffix,min] of [['gallery.png',10000],['battle.webp',5000],['ultimate.webp',5000],['ko.webp',5000]]){
       const path=new URL(`../assets/characters/${musician.id}-${suffix}`,import.meta.url);
@@ -17,11 +17,11 @@ test('34 位音樂家都有完整圖鑑與三種戰鬥姿勢',()=>{
   }
 });
 
-test('34 位音樂家依四大音樂史類別完整排列',()=>{
+test('37 位音樂家依四大音樂史類別完整排列',()=>{
   assert.deepEqual(ARTIST_CATEGORY_GROUPS.map(group=>group.label),['巴洛克','古典與過渡','浪漫與民族樂派','現代與跨界']);
   const groupedIds=ARTIST_CATEGORY_GROUPS.flatMap(group=>group.artistIds);
-  assert.equal(groupedIds.length,34);
-  assert.equal(new Set(groupedIds).size,34);
+  assert.equal(groupedIds.length,37);
+  assert.equal(new Set(groupedIds).size,37);
   assert.deepEqual(ARTISTS.map(musician=>musician.id),groupedIds);
 });
 
@@ -43,4 +43,14 @@ test('新社群封面與音樂家入口已接入',()=>{
   assert.match(index,/MAESTRO[\s\S]*COMBAT/);
   assert.match(main,/p1:'bach',p2:'mozart'/);
   assert.doesNotMatch(main,/INTRO_VIDEO_ID='ggVejS6dfq0'/);
+});
+
+test('進入音樂殿堂會播放指定影片並可結束或略過',()=>{
+  const index=readFileSync(new URL('../index.html',import.meta.url),'utf8');
+  const main=readFileSync(new URL('../js/main.js',import.meta.url),'utf8');
+  assert.match(index,/id="introVideo"/);
+  assert.match(index,/id="skipVideo"/);
+  assert.match(main,/videoId:'ZOabJpM7yIw'/);
+  assert.match(main,/YT\.PlayerState\.ENDED/);
+  assert.match(main,/onError:[\s\S]*影片目前無法嵌入播放/);
 });

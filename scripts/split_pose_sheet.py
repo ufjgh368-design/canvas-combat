@@ -18,6 +18,7 @@ def main() -> None:
     parser.add_argument("--input", required=True, type=Path)
     parser.add_argument("--artist", required=True)
     parser.add_argument("--out-dir", required=True, type=Path)
+    parser.add_argument("--gutter", type=int, default=0, help="Trim this many pixels from internal panel edges")
     args = parser.parse_args()
 
     sheet = Image.open(args.input).convert("RGBA")
@@ -25,7 +26,9 @@ def main() -> None:
     args.out_dir.mkdir(parents=True, exist_ok=True)
 
     for index, suffix in enumerate(SUFFIXES):
-        panel = sheet.crop((boundaries[index], 0, boundaries[index + 1], sheet.height))
+        left = boundaries[index] + (args.gutter if index > 0 else 0)
+        right = boundaries[index + 1] - (args.gutter if index < len(SUFFIXES) - 1 else 0)
+        panel = sheet.crop((left, 0, right, sheet.height))
         alpha = panel.getchannel("A")
         bounds = alpha.getbbox()
         if bounds is None:
@@ -39,7 +42,7 @@ def main() -> None:
         frame.alpha_composite(subject, (x, y))
 
         output = args.out_dir / f"{args.artist}-{suffix}.webp"
-        frame.save(output, "WEBP", lossless=True, quality=95, method=6)
+        frame.save(output, "WEBP", quality=96, method=6)
         print(f"Wrote {output}")
 
 

@@ -25,6 +25,9 @@ const CORE_MUSICIANS = [
   {id:'brahms',nameZh:'布拉姆斯',nameEn:'Johannes Brahms',birthYear:1833,deathYear:1897,nationality:'德國',period:'浪漫時期',artMovement:'德國浪漫樂派',title:'古典形式的浪漫守護者',color:'#8b684b',stageId:'romantic',bgmId:'romantic',representativeWorks:['第一號交響曲','德意志安魂曲','匈牙利舞曲第五號'],keyTerms:['發展變奏','古典形式','厚實織體'],moves:['匈牙利舞步','變奏重擊','安魂曲穹頂']},
   {id:'tchaikovsky',nameZh:'柴可夫斯基',nameEn:'Pyotr Ilyich Tchaikovsky',birthYear:1840,deathYear:1893,nationality:'俄羅斯',period:'浪漫時期',artMovement:'俄羅斯浪漫樂派',title:'芭蕾旋律的情感劇作家',color:'#4f82a6',stageId:'romantic',bgmId:'romantic',representativeWorks:['天鵝湖','胡桃鉗','第六號交響曲悲愴'],keyTerms:['芭蕾音樂','抒情旋律','管弦樂色彩'],moves:['糖梅仙舞','天鵝展翼','悲愴交響']},
   {id:'dvorak',nameZh:'德弗札克',nameEn:'Antonín Dvořák',birthYear:1841,deathYear:1904,nationality:'捷克',period:'浪漫時期',artMovement:'民族樂派',title:'新世界的波希米亞旅人',color:'#5f8b6a',stageId:'romantic',bgmId:'romantic',representativeWorks:['新世界交響曲','斯拉夫舞曲','大提琴協奏曲'],keyTerms:['民族音樂','舞曲節奏','管弦樂旋律'],moves:['斯拉夫舞步','大提琴歌詠','新世界交響']},
+  {id:'grieg',nameZh:'葛利格',nameEn:'Edvard Grieg',birthYear:1843,deathYear:1907,nationality:'挪威',period:'浪漫時期',artMovement:'挪威民族樂派',title:'峽灣與山妖的北國詩人',color:'#4f7f78',stageId:'romantic',bgmId:'romantic',representativeWorks:['皮爾金組曲','A小調鋼琴協奏曲','抒情小品'],keyTerms:['挪威民間音樂','抒情小品','民族和聲'],moves:['晨歌微光','山魔王疾走','北境峽灣交響']},
+  {id:'puccini',nameZh:'普契尼',nameEn:'Giacomo Puccini',birthYear:1858,deathYear:1924,nationality:'義大利',period:'晚期浪漫',artMovement:'真實主義歌劇',title:'讓歌劇舞台燃燒真情的大師',color:'#a64f55',stageId:'romantic',bgmId:'romantic',representativeWorks:['波希米亞人','托斯卡','杜蘭朵'],keyTerms:['真實主義歌劇','歌唱性旋律','戲劇配器'],moves:['波希米亞詠嘆','托斯卡鐘聲','今夜無人入睡']},
+  {id:'rachmaninoff',nameZh:'拉赫曼尼諾夫',nameEn:'Sergei Rachmaninoff',birthYear:1873,deathYear:1943,nationality:'俄羅斯',period:'晚期浪漫',artMovement:'俄羅斯浪漫樂派',title:'鐘聲與鋼琴深淵的最後浪漫派',color:'#53648d',stageId:'romantic',bgmId:'romantic',representativeWorks:['第二號鋼琴協奏曲','帕格尼尼主題狂想曲','交響舞曲'],keyTerms:['寬廣旋律','鐘聲意象','鋼琴炫技'],moves:['鐘聲低鳴','狂想變奏','第二協奏曲洪流']},
 
   {id:'mahler',nameZh:'馬勒',nameEn:'Gustav Mahler',birthYear:1860,deathYear:1911,nationality:'奧地利',period:'晚期浪漫',artMovement:'晚期浪漫樂派',title:'以交響曲容納世界的人',color:'#616e91',stageId:'modern',bgmId:'modern',representativeWorks:['第二號交響曲復活','第五號交響曲','大地之歌'],keyTerms:['巨型交響曲','歌曲與交響曲','遠距配器'],moves:['遠方號角','大地之歌','復活交響']},
   {id:'debussy',nameZh:'德布西',nameEn:'Claude Debussy',birthYear:1862,deathYear:1918,nationality:'法國',period:'現代音樂早期',artMovement:'印象主義音樂',title:'音色與光影的煉金師',color:'#4d8ca4',stageId:'modern',bgmId:'modern',representativeWorks:['牧神午後前奏曲','月光','大海'],keyTerms:['全音音階','音色和聲','非功能和聲'],moves:['月光音階','牧神迷霧','大海三景']},
@@ -41,7 +44,7 @@ const CORE_MUSICIANS = [
 export const ARTIST_CATEGORY_GROUPS = [
   {id:'baroque',label:'巴洛克',artistIds:['monteverdi','purcell','rameau','vivaldi','bach','handel','scarlatti']},
   {id:'classical',label:'古典與過渡',artistIds:['clementi','haydn','mozart','beethoven','paganini','rossini','schubert']},
-  {id:'romantic',label:'浪漫與民族樂派',artistIds:['mendelssohn','chopin','schumann','liszt','wagner','verdi','clara-schumann','brahms','tchaikovsky','dvorak']},
+  {id:'romantic',label:'浪漫與民族樂派',artistIds:['mendelssohn','chopin','schumann','liszt','wagner','verdi','clara-schumann','brahms','tchaikovsky','dvorak','grieg','puccini','rachmaninoff']},
   {id:'modern',label:'現代與跨界',artistIds:['mahler','debussy','schoenberg','ravel','bartok','stravinsky','prokofiev','gershwin','shostakovich','bernstein']},
 ];
 

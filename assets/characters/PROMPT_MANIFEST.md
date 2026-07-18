@@ -37,6 +37,9 @@
 | Brahms | Symphonic Variations |
 | Tchaikovsky | Swan Lake Blizzard |
 | Dvořák | New World Express |
+| Grieg | Northern Fjord Symphony |
+| Puccini | Nessun Dorma Grand Finale |
+| Rachmaninoff | Second Concerto Flood |
 | Mahler | Resurrection Cosmos |
 | Debussy | La Mer Moonrise |
 | Schoenberg | Twelve-Tone Matrix |
