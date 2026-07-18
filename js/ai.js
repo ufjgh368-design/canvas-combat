@@ -13,5 +13,11 @@ export function chooseAiMove(cpu,player,difficulty='medium',random=Math.random){
   for(const [id,w] of pool){roll-=w;if(roll<=0)return MOVES[id];}return MOVES.light;
 }
 export function aiAnswersCorrect(difficulty,questionDifficulty,random=Math.random){return random()<AI_DIFFICULTY_CONFIG[difficulty].accuracy[questionDifficulty];}
+export function chooseAiAnswer(question,difficulty='medium',random=Math.random){
+  const correct=aiAnswersCorrect(difficulty,question.difficulty,random);
+  if(correct)return {index:question.answerIndex,correct:true};
+  const wrong=question.options.map((_,index)=>index).filter(index=>index!==question.answerIndex);
+  return {index:wrong[Math.min(wrong.length-1,Math.floor(random()*wrong.length))],correct:false};
+}
 export function aiCounterSucceeds(difficulty,random=Math.random){return random()<AI_DIFFICULTY_CONFIG[difficulty].counterChance;}
 export function thinkingTime(difficulty,random=Math.random){const [a,b]=AI_DIFFICULTY_CONFIG[difficulty].cpuThinkingTime;return Math.round(a+random()*(b-a));}
