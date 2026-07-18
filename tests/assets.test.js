@@ -46,6 +46,14 @@ test('新社群封面與音樂家入口已接入',()=>{
   assert.doesNotMatch(main,/INTRO_VIDEO_ID='ggVejS6dfq0'/);
 });
 
+test('無文字主視覺已套用主選單與模式選項',()=>{
+  const visual=new URL('../assets/menu/maestro-menu-key-visual.webp',import.meta.url);
+  assert.ok(statSync(visual).size>300000);
+  const css=readFileSync(new URL('../homepage.css',import.meta.url),'utf8');
+  assert.match(css,/#home\s*\{[\s\S]*maestro-menu-key-visual\.webp/);
+  assert.match(css,/#home \.mode-btn\s*\{[\s\S]*maestro-menu-key-visual\.webp/);
+});
+
 test('進入音樂殿堂會播放指定影片並可結束或略過',()=>{
   const index=readFileSync(new URL('../index.html',import.meta.url),'utf8');
   const main=readFileSync(new URL('../js/main.js',import.meta.url),'utf8');
