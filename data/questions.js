@@ -5,6 +5,7 @@ const labels={easy:'簡單',medium:'中等',hard:'困難'};
 const TYPE_BY_INDEX=['記憶','記憶','理解','文化脈絡','判斷','素養應用','文化脈絡','理解','趣聞','素養應用'];
 const DIFFICULTY_BY_INDEX=['easy','easy','medium','medium','hard','hard','medium','medium','easy','hard'];
 const distinct=values=>[...new Set(values)];
+const withoutTrailingParenthetical=value=>value.replace(/\s*(?:（[^（）]*）|\([^()]*\))(?=[？?!！。]?$)/,'');
 const peers=(artist,offset=0)=>{
   const pool=ARTISTS.filter(item=>item.id!==artist.id);
   return Array.from({length:pool.length},(_,index)=>pool[(index+offset)%pool.length]);
@@ -84,6 +85,7 @@ function buildQuestion(artist,n,globalIndex){
   const shift=(globalIndex*7+n)%4;
   const options=raw.map((_,index)=>raw[(index+shift)%4]);
   const safeQuestion=correct===artist.nameZh ? question.replaceAll(artist.nameZh,'') : question;
+  const displayQuestion=withoutTrailingParenthetical(safeQuestion);
   return {
     id:`${artist.stageId}-${artist.id}-${difficulty}-${String(n+1).padStart(3,'0')}`,
     difficulty,
@@ -91,7 +93,7 @@ function buildQuestion(artist,n,globalIndex){
     artistIds:[artist.id],
     category:questionType,
     questionType,
-    question:safeQuestion,
+    question:displayQuestion,
     options,
     answerIndex:options.indexOf(correct),
     explanation:`答案是「${correct}」。${explanation}`,
