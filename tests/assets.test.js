@@ -3,6 +3,20 @@ import assert from 'node:assert/strict';
 import { existsSync, readFileSync, statSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import { ARTISTS,ARTIST_CATEGORY_GROUPS } from '../data/artists.js';
+import { STAGES,STAGE_BACKGROUNDS } from '../data/stages.js';
+
+test('四大藝術史分類使用四張獨立舞台背景',()=>{
+  assert.equal(new Set(Object.values(STAGE_BACKGROUNDS)).size,4);
+  assert.equal(STAGES.renaissance.background,STAGE_BACKGROUNDS.renaissance);
+  for(const id of ['baroque','dutch','romantic'])assert.equal(STAGES[id].background,STAGE_BACKGROUNDS.baroqueRomantic);
+  for(const id of ['impressionist','postimpressionist'])assert.equal(STAGES[id].background,STAGE_BACKGROUNDS.impressionPost);
+  for(const id of ['modern','abstract','surreal','pop'])assert.equal(STAGES[id].background,STAGE_BACKGROUNDS.modernRevolution);
+  for(const relative of Object.values(STAGE_BACKGROUNDS)){
+    const path=new URL(`../${relative}`,import.meta.url);
+    assert.equal(existsSync(path),true,`${relative} missing`);
+    assert.ok(statSync(path).size>200000,`${relative} too small`);
+  }
+});
 
 test('34 位藝術家都有可用圖鑑角色圖',()=>{
   assert.equal(ARTISTS.length,34);

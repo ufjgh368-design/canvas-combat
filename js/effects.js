@@ -14,7 +14,8 @@ export class BattleRenderer {
     this.bossFx = null;
     this.time = 0;
     this.images = new Map();
-    this.background = this.loadImage('assets/ui/main-visual-background.png');
+    this.fallbackBackground = this.loadImage('assets/ui/main-visual-background.png');
+    this.background = null;
     this.resize = () => this.fit();
     addEventListener('resize', this.resize);
     this.fit();
@@ -44,6 +45,7 @@ export class BattleRenderer {
   setBattle(fighters, stage) {
     this.fighters = fighters;
     this.stage = stage;
+    this.background = this.loadImage((STAGES[stage] || STAGES.renaissance).background);
     this.particles = [];
     this.bossFx = null;
     // The battle screen is hidden while the renderer is constructed. Measure it
@@ -133,7 +135,7 @@ export class BattleRenderer {
     const w = this.w;
     const h = this.h;
     const stage = STAGES[this.stage] || STAGES.renaissance;
-    if (!this.drawCover(this.background)) {
+    if (!this.drawCover(this.background) && !this.drawCover(this.fallbackBackground)) {
       const gradient = c.createLinearGradient(0, 0, 0, h);
       gradient.addColorStop(0, stage.colors[0]);
       gradient.addColorStop(.62, stage.colors[1]);
